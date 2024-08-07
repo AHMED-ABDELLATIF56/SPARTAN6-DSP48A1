@@ -8,23 +8,19 @@ module reg_mux_block (x,sel,clk,ce,rst,y);
 	//Register
 	generate
 		if (RSTTYPE=="SYNC") begin
-			always @(posedge clk) begin 
-				if (ce) begin
-					if(rst) begin
+			always @(posedge clk or posedge rst) begin 
+				if(rst) begin
 					reg_out <= 0;
-					end else begin
-						reg_out <= x;
-					end
+				end else if (ce) begin
+					reg_out <= x;
 				end else reg_out <= reg_out;
 			end
 		end else begin
 			always @(posedge clk or posedge rst) begin 
-				if (ce) begin
-					if(rst) begin
+				if(rst) begin
 					reg_out <= 0;
-					end else begin
-						reg_out <= x;
-					end
+				end else if (ce) begin
+					reg_out <= x;
 				end else reg_out <= reg_out;
 			end 
 		end

@@ -34,7 +34,7 @@ always @(*) begin
 	//Multiplixer X
 	case (opmodew[1:0])
 		0: x_out=0;
-		1: x_out={12'h000,mw};
+		1: x_out={12{mw[35]},mw};
 		2: x_out=pcout;
 		3: x_out={dw[11:0], a1w[17:0],b1w[17:0]};
 		default : x_out=0;
